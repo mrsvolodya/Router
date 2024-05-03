@@ -1,42 +1,32 @@
-import React, { useState } from 'react';
-import { NewPostPage } from './pages/NewPostPage';
-import { PostDetailsPage } from './pages/PostDetailsPage';
-import { PostsPage } from './pages/PostsPage';
-import { UsersPage } from './pages/UsersPage';
-import { HomePage } from './pages/HomePage';
-
-type Page = 'home' | 'users' | 'posts' | 'postDetails' | 'newPost';
+import React from "react";
+import { Link, Outlet } from "react-router-dom";
 
 export const App: React.FC = () => {
-  const [page, setPage] = useState<Page>('home');
+  return (
+    <>
+      <nav className="navbar is-light px-3">
+        <div className="navbar-brand">
+          <Link to="/" className="navbar-item">
+            <img src="/logo.svg" alt="MA" className="logo" />
+          </Link>
 
-  return <>
-    <nav className="navbar is-light px-3">
-      <div className="navbar-brand">
-        <a href="/" className="navbar-item">
-          <img src="/logo.svg" alt="MA" className="logo" />
-        </a>
+          <Link to="/" className="navbar-item is-active">
+            Home
+          </Link>
 
-        <a href="#/" className="navbar-item is-active" onClick={() => setPage('home')}>
-          Home
-        </a>
+          <Link to="users" className="navbar-item">
+            Users
+          </Link>
 
-        <a href="#/users" className="navbar-item" onClick={() => setPage('users')}>
-          Users
-        </a>
+          <Link to="posts" className="navbar-item">
+            Posts
+          </Link>
+        </div>
+      </nav>
 
-        <a href="#/posts" className="navbar-item" onClick={() => setPage('posts')}>
-          Posts
-        </a>
+      <div className="section">
+        <Outlet />
       </div>
-    </nav>
-
-    <div className="section">
-      {page === 'home' && <HomePage />}
-      {page === 'users' && <UsersPage />}
-      {page === 'posts' && <PostsPage />}
-      {page === 'postDetails' && <PostDetailsPage />}
-      {page === 'newPost' && <NewPostPage />}
-    </div>
-  </>;
-}
+    </>
+  );
+};
