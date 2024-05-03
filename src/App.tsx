@@ -13,7 +13,7 @@ export const App: React.FC = () => {
           </NavLink>
 
           <NavLink to="/" className={getIsActive}>
-            Home
+            Homee
           </NavLink>
 
           <NavLink to="users" className={getIsActive}>
