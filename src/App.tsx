@@ -3,7 +3,9 @@ import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
 export const App: React.FC = () => {
-  const getIsActive = ({isActive}: {isActive: boolean}) => classNames("navbar-item", {'is-active': isActive})
+  const getIsActive = ({ isActive }: { isActive: boolean }) =>
+    classNames("navbar-item", { "is-active": isActive });
+  const getStyle = ({ isActive }: { isActive: boolean }) => ({ color: isActive ? "yellow" : "" });
   return (
     <>
       <nav className="navbar is-light px-3">
@@ -12,15 +14,15 @@ export const App: React.FC = () => {
             <img src="/logo.svg" alt="MA" className="logo" />
           </NavLink>
 
-          <NavLink to="/" className={getIsActive}>
-            Homee
+          <NavLink to="/" className={getIsActive} style={getStyle}>
+            Home
           </NavLink>
 
-          <NavLink to="users" className={getIsActive}>
+          <NavLink to="users" className={getIsActive} style={getStyle}>
             Users
           </NavLink>
 
-          <NavLink to="posts" className="navbar-item">
+          <NavLink to="posts" className="navbar-item" style={getStyle}>
             Posts
           </NavLink>
         </div>

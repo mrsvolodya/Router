@@ -6,7 +6,7 @@ import { PostForm } from '../components/PostForm';
 import { PostsContext } from '../store/PostsContext';
 import { useUsers } from '../store/UsersContext';
 
-export const PostDetailsPage = () => {
+export function PostDetailsPage() {
   const { updatePost } = useContext(PostsContext);
   const users = useUsers();
 
@@ -40,8 +40,7 @@ export const PostDetailsPage = () => {
         users={users}
         fixedUserId={11}
         post={post}
-        onSubmit={updatePost}
-      />
+        onSubmit={updatePost} />
     )}
   </>;
-};
+}

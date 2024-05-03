@@ -23,6 +23,10 @@ export const Root = () => {
                 <Route path="620" element={<PostDetailsPage />} />
                 <Route path="new" element={<NewPostPage />} />
               </Route>
+              <Route
+                path="*"
+                element={<p style={{ color: "red" }}>Not found page</p>}
+              />
             </Route>
           </Routes>
         </PostsProvider>
