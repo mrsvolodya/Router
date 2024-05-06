@@ -33,7 +33,7 @@ export const UsersList: React.FC<Props> = ({ users }) => {
                 </Link>
               ) : (
                 <Link
-                  to={`../${user.id}`}
+                  to={`${user.id}/posts`}
                   className="icon button is-success is-inverted"
                 >
                   <i className="far fa-eye" />
