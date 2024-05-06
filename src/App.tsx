@@ -1,43 +1,61 @@
-import React, { useState } from 'react';
-import { NewPostPage } from './pages/NewPostPage';
-import { PostDetailsPage } from './pages/PostDetailsPage';
-import { PostsPage } from './pages/PostsPage';
-import { UsersPage } from './pages/UsersPage';
-import { HomePage } from './pages/HomePage';
-
-type Page = 'home' | 'users' | 'posts' | 'postDetails' | 'newPost';
+import classNames from "classnames";
+import React from "react";
+import { NavLink, Outlet, useParams } from "react-router-dom";
+const getIsActive = ({ isActive }: { isActive: boolean }) =>
+  classNames("navbar-item", { "is-active": isActive });
+const getStyleBreadCrumps = ({ isActive }: { isActive: boolean }) => ({
+  fontWeight: isActive ? "bold" : "normal",
+});
 
 export const App: React.FC = () => {
-  const [page, setPage] = useState<Page>('home');
+  const { userId } = useParams();
+  return (
+    <>
+      <nav className="navbar is-light px-3">
+        <div className="navbar-brand">
+          <NavLink to="/" end className="navbar-item">
+            <img src="/logo.svg" alt="MA" className="logo" />
+          </NavLink>
 
-  return <>
-    <nav className="navbar is-light px-3">
-      <div className="navbar-brand">
-        <a href="/" className="navbar-item">
-          <img src="/logo.svg" alt="MA" className="logo" />
-        </a>
+          <NavLink
+            to="/"
+            end
+            className={getIsActive}
+            style={getStyleBreadCrumps}
+          >
+            Home
+          </NavLink>
 
-        <a href="#/" className="navbar-item is-active" onClick={() => setPage('home')}>
-          Home
-        </a>
+          <NavLink
+            to="users"
+            className={getIsActive}
+            style={getStyleBreadCrumps}
+          >
+            Users
+          </NavLink>
 
-        <a href="#/users" className="navbar-item" onClick={() => setPage('users')}>
-          Users
-        </a>
+          <NavLink
+            to="posts"
+            className={getIsActive}
+            style={getStyleBreadCrumps}
+          >
+            Posts
+          </NavLink>
+          {userId && (
+            <NavLink
+              to="users"
+              className={getIsActive}
+              style={{ color: "brown", fontWeight: "bold" }}
+            >
+              User {userId}
+            </NavLink>
+          )}
+        </div>
+      </nav>
 
-        <a href="#/posts" className="navbar-item" onClick={() => setPage('posts')}>
-          Posts
-        </a>
+      <div className="section">
+        <Outlet />
       </div>
-    </nav>
-
-    <div className="section">
-      
-      {page === 'home' && <HomePage />}
-      {page === 'users' && <UsersPage />}
-      {page === 'posts' && <PostsPage />}
-      {page === 'postDetails' && <PostDetailsPage />}
-      {page === 'newPost' && <NewPostPage />}
-    </div>
-  </>;
-}
+    </>
+  );
+};
