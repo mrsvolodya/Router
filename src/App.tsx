@@ -32,6 +32,7 @@ export const App: React.FC = () => {
     </nav>
 
     <div className="section">
+      
       {page === 'home' && <HomePage />}
       {page === 'users' && <UsersPage />}
       {page === 'posts' && <PostsPage />}
